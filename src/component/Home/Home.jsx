@@ -2,6 +2,7 @@ import React from 'react'
 import "./Home.css"
 import { MultiItemCarousel } from './MultiItemCarousel'
 import { RestaurantCard } from '../Restaurant/RestaurantCard'
+import { Auth } from '../Auth/Auth'
 
 const restaurant = [1,1,1,1,1,1,1,1]
 
