@@ -48,7 +48,7 @@ export const loginUser = (reqData)=>async(dispatch)=>{
 export const getUser = (jwt)=>async(dispatch)=>{
     dispatch({type:GET_USER_REQUEST})
     try{
-        const {data} = await api.get(`/auth/signin`,{
+        const {data} = await api.get(`/api/users/profile`,{
             headers:{
                 Authorization:`Bearer ${jwt}`
             }
@@ -82,7 +82,6 @@ export const addToFavroites = ({jwt,restaurantId})=>async(dispatch)=>{
 }
 
 export const logout = ()=>async(dispatch)=>{
-    dispatch({type:LOGIN_REQUEST})
     try{
         localStorage.clear()
         dispatch({type:LOGIN_SUCCESS})

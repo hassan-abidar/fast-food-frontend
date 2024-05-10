@@ -8,17 +8,23 @@ import { RestaurantDetails } from './component/Restaurant/RestaurantDetails';
 import {Cart} from './component/Cart/Cart.jsx'
 import { Profile } from './component/Profile/Profile.jsx';
 import { CustomerRouter } from './Routers/CustomerRouter.jsx';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from './state/Authentification/Action.js';
 
 function App() {
+  const dispatch = useDispatch();
+  const jwt = localStorage.getItem("jwt");
+  const {auth} = useSelector(store=>store)
+
+  useEffect(()=>{
+    dispatch(getUser( auth.jwt ||jwt ));
+  },[auth.jwt]);
+
   return (
     <div className="App">
       <ThemeProvider theme={darkTheme}>
         <CssBaseline/>
-      {/* <Navbar/> */}
-      {/* <Home/> */}
-      {/* <RestaurantDetails/> */}
-      {/* <Cart/> */}
-      {/* <Profile/> */}
       <CustomerRouter/>
       </ThemeProvider>
     </div>
