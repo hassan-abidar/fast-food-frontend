@@ -1,4 +1,4 @@
-import { ADD_TO_FAVORITES_FAILURE, ADD_TO_FAVORITES_REQUEST, ADD_TO_FAVORITES_SUCCESS, GET_USER_FAILURE, GET_USER_REQUEST, GET_USER_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS } from "./ActionType"
+import { ADD_TO_FAVORITES_FAILURE, ADD_TO_FAVORITES_REQUEST, ADD_TO_FAVORITES_SUCCESS, GET_USER_FAILURE, GET_USER_REQUEST, GET_USER_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS } from "./ActionType"
 import axios from "axios"
 import { API_URL, api } from "../../component/Config/api"
 
@@ -81,13 +81,15 @@ export const addToFavroites = ({jwt,restaurantId})=>async(dispatch)=>{
     }
 }
 
-export const logout = ()=>async(dispatch)=>{
-    try{
-        localStorage.clear()
-        dispatch({type:LOGIN_SUCCESS})
-        console.log("Logout success")
-    }catch(error){
-        console.log("error : ",error)
+export const logout = () => async (dispatch) => {
+    try {
+        localStorage.clear();
+        dispatch({ type: LOGOUT });
+        console.log("Logout success");
+    } catch (error) {
+        console.log("error : ", error);
     }
-}
+};
+
+
 

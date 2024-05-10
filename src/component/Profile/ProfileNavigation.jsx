@@ -8,6 +8,8 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import { Divider, Drawer, useMediaQuery } from '@mui/material';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import {logout} from "../../state/Authentification/Action"
 
 
 
@@ -23,8 +25,15 @@ const menu = [
 export const ProfileNavigation = (open,handleClose) => {
   const isSmallScreen = useMediaQuery("(max-width:1080)")
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleNavigaton=(item)=>{
-    navigate(`/my-profile/${item.title.toLowerCase()}`)
+    if(item.title==="Logout"){
+      dispatch(logout());
+      navigate("/");
+    }
+    else {
+      navigate(`/my-profile/${item.title.toLowerCase()}`)
+    }
   }
 
   return (

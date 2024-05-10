@@ -11,7 +11,6 @@ import { useSelector } from 'react-redux';
 
 export const Navbar = () => {
 
-
     
     const {auth} = useSelector(store=>store)
     const navigate = useNavigate();
@@ -26,6 +25,7 @@ export const Navbar = () => {
     <div className='px-5 z-50 py-[.8rem] bg-[#e91e63] lg:px-20 flex justify-between'>
         <div className='flex items-center space-x-4'>
                 <li  className='logo font-semibold text-gray-300 text2p'>
+                Good food is the foundation of genuine happiness
                 </li>
         </div>
         <div className='flex items-center space-x-4 justify-center'>
