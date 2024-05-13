@@ -5,17 +5,20 @@ import { RestaurantCard } from '../Restaurant/RestaurantCard'
 import { Auth } from '../Auth/Auth'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllRestaurantsAction } from '../../state/Restaurant/Actions'
+import { useNavigate } from 'react-router-dom'
 
 const restaurants = [1,1,1,1,1,1,1,1]
 
 export const Home = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const jwt = localStorage.getItem("jwt")
   const {restaurant} =useSelector(store=>store)
-  console.log("restaurant : ",restaurant)
+
   useEffect(()=>{
     dispatch(getAllRestaurantsAction(jwt))
   },[])
+  
 
   return (
     <div className='pb-10'>

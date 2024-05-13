@@ -14,7 +14,7 @@ const demo = [
 ]
 
 
-export const MenuCard = () => {
+export const MenuCard = ({item}) => {
   const handleCheckBoxChange =(value)=>{
       console.log("value")
   }
@@ -29,16 +29,16 @@ export const MenuCard = () => {
           <div className='lg:flex items-center justify-between'>
             <div className='lg:flex items-center lg:gap-5'>
               <img className='w-[7rem] h-[7rem] object-cover'
-                src="https://asset.kompas.com/crops/fP_Q5TD9BOn5G5JTnntgtDIjQMI=/53x36:933x623/750x500/data/photo/2021/10/21/6171492e1ea12.jpg" alt="" />
+                src={item.images[0]} alt="" />
               <div className='space-y-1 lg:space-y-5 lg:max-w-2xl'>
                 <p className='font-semibold text-xl'>
-                  Burger
+                  {item.name}
                 </p>
                 <p>
-                  38  Dhs
+                  {item.price} DHS
                 </p>
                 <p className='text-gray-400'>
-                  Juicy beef patty topped with melted cheddar cheese, crisp lettuce, ripe tomato slices, and tangy pickles
+                  {item.description}
                 </p>
               </div>
             </div>
