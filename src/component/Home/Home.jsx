@@ -6,6 +6,7 @@ import { Auth } from '../Auth/Auth'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllRestaurantsAction } from '../../state/Restaurant/Actions'
 import { useNavigate } from 'react-router-dom'
+import { findCart } from '../../state/Cart/Action'
 
 const restaurants = [1,1,1,1,1,1,1,1]
 
@@ -17,6 +18,7 @@ export const Home = () => {
 
   useEffect(()=>{
     dispatch(getAllRestaurantsAction(jwt))
+    dispatch(findCart(jwt))
   },[])
   
 

@@ -6,7 +6,7 @@ import {
     ADD_ITEM_TO_CART_REQUEST, ADD_ITEM_TO_CART_SUCCESS, ADD_ITEM_TO_CART_FAILURE,
     UPDATE_CARTITEM_REQUEST, UPDATE_CARTITEM_SUCCESS, UPDATE_CARTITEM_FAILURE,
     REMOVE_CARTITEM_REQUEST, REMOVE_CARTITEM_SUCCESS, REMOVE_CARTITEM_FAILURE
-  } from './ActionTypes';
+  } from './ActionType';
   import { api } from "../../component/Config/api";
 
   
@@ -15,13 +15,14 @@ import {
       dispatch({ type: FIND_CART_REQUEST });
   
       try {
-        const response = await api.get(`/api/cart/`,{
+        const response = await api.get(`/api/cart`,{
             headers:{
                 Authorization:`Bearer ${token}`
             }
         })
   
         dispatch({ type: FIND_CART_SUCCESS, payload: response.data }); 
+        console.log("my cart : ", response.data)
       } catch (error) {
         dispatch({ type: FIND_CART_FAILURE, payload: error });
       }
@@ -81,6 +82,7 @@ export const addItemToCart = (reqData) => {
         });
   
         dispatch({ type: ADD_ITEM_TO_CART_SUCCESS, payload: response.data });
+        console.log("item added to cart : ", response.data)
       } catch (error) {
         dispatch({ type: ADD_ITEM_TO_CART_FAILURE, payload: error });
       }

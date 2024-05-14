@@ -12,6 +12,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from './state/Authentification/Action.js';
 
+import { findCart } from './state/Cart/Action.js';
+
 function App() {
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
@@ -19,7 +21,9 @@ function App() {
 
   useEffect(()=>{
     dispatch(getUser( auth.jwt ||jwt ));
+    dispatch(findCart(jwt))
   },[auth.jwt]);
+ 
 
   return (
     <div className="App">
