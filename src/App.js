@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from './state/Authentification/Action.js';
 
 import { findCart } from './state/Cart/Action.js';
+import { Routers } from './Routers/Routers.jsx';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ function App() {
     <div className="App">
       <ThemeProvider theme={darkTheme}>
         <CssBaseline/>
-      <CustomerRouter/>
+      <Routers/>
       </ThemeProvider>
     </div>
   );
