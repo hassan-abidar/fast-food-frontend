@@ -29,19 +29,18 @@ import {
     };
   };
   
-  export const clearCart = () => {
+  export const clearCart = (token) => {
     return async (dispatch) => {
       dispatch({ type: CLEAR_CART_REQUEST });
   
       try {
         const {data} = await api.put(`/api/cart/clear`,{},{
-          headers:
-          {
-            Authorization:`Bearer ${localStorage.getItem("jwt")}`,
-          }
+          headers:{
+            Authorization:`Bearer ${token}`
+        }
         })
         dispatch({ type: CLEAR_CART_SUCCESS,payload:data });
-        console.log("Cleared cart : ",data);
+        
       } catch (error) {
         dispatch({ type: CLEAR_CART_FAILURE, payload: error.message });
         console.log("Caught error : ",error);
@@ -115,6 +114,7 @@ export const addItemToCart = (reqData) => {
   export const removeCartItem = (itemId,jwt) => {
     return async (dispatch) => {
       dispatch({ type: REMOVE_CARTITEM_REQUEST });
+      console.log("itemId : ",itemId)
   
       try {
         const {data}= await api.delete(`/api/cart-item/${itemId}/remove`,

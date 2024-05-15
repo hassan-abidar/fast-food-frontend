@@ -13,7 +13,8 @@ export const RestaurantCard = ({ item }) => {
     const jwt =  localStorage.getItem("jwt")
     const {auth} = useSelector(store=>store)
     const handleAddToFavorite=()=>{
-        dispatch(addToFavroites({restaurantId:item.id,jwt}))
+
+        dispatch(addToFavroites({restaurantId:item?.id,jwt}))
         
     }
     const handleNavigateToRestaurant = () => {

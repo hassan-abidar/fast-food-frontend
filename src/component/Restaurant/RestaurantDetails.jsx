@@ -49,7 +49,7 @@ export const RestaurantDetails = () => {
             vegeterian: foodType==="vegeterian",
             nonveg: foodType==="non_vegeterian" ,
             seasonal: foodType==="seasonal",
-            foodCategory: selectedCategory, // Correct parameter name
+            foodCategory: selectedCategory, 
         }));
     }, [selectedCategory,foodType]);
     

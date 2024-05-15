@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 
 export const Favorites = () => {
   const {auth} = useSelector(store=>store)
+  
   return (
     
     <div>

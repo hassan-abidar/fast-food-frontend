@@ -1,5 +1,5 @@
 import { Box, Button, Card, Divider, Grid, Modal, TextField } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import { CartItem } from './CartItem'
 import { AddressCart } from './AddressCart'
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
@@ -7,6 +7,11 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { createOrder } from '../../state/Order/Action';
+import { clearCart } from '../../state/Cart/Action';
+import Alert from '@mui/material/Alert';
+import { CheckIcon } from '@heroicons/react/16/solid';
+import { useNavigate } from 'react-router-dom';
+
 
  export const style = {
   position: 'absolute',
@@ -40,9 +45,13 @@ export const Cart = () => {
   const [open, setOpen] = React.useState(false);
   const {cart,auth}=useSelector(store=>store)
   const handleClose = () => setOpen(false);
+  const navigate=useNavigate()
   const dispatch=useDispatch();
+  const handleClearCart =()=>{
+    dispatch(clearCart(localStorage.getItem("jwt")));      
+  }
+  const [showAlert, setShowAlert] = useState(false); 
   const handleSubmit=(values)=>{
-    console.log("RestauId : ",cart.cartItems[0].food?.restaurant.id)
       const data = {
         jwt:localStorage.getItem("jwt"),
         order:{
@@ -58,11 +67,17 @@ export const Cart = () => {
         }
       }
       dispatch(createOrder(data))
-      console.log("form values : ",values);
+      dispatch(clearCart(localStorage.getItem("jwt")));
+      setShowAlert(true);   
+      handleClose()
+      
+      
   }
 
   return (
     <>
+      
+      
       <main className='lg:flex justify-between'>
         <section className='lg:w-[30%] space-y-6 lg:min-h-screen pt-10'>
           {cart.cartItems.map((item) => 
@@ -106,8 +121,10 @@ export const Cart = () => {
               <p>
                 {cart.cart?.total+14+20} MAD
               </p>
+              
 
             </div>
+            <Button color='primary' variant='contained' fullWidth onClick={handleClearCart}> Clear Cart </Button>
           </div>
         </section>
         <Divider orientation='vertical' flexItem />
@@ -116,12 +133,11 @@ export const Cart = () => {
             <h1 className='text-center font-semibold text-2xl py-10'>
               Choose Delivery Address</h1>
             <div className='flex gap-5 flex-wrap justify-center'>
-              {[1, 1, 1, 1].map((item) => (<AddressCart handleSelectAddress={createOrderUsingSelectedAddress} item={item} showButton={true} />))}
               <Card className='flex gap-5 w-64 p-5'>
                 <AddLocationAltIcon />
                 <div className='space-y-3 text-gray-500'>
                   <h1 className='font-semibold text-lg text-white'>
-                    Add new address
+                    Add address
                   </h1>
                   <Button color='primary' variant='contained' fullWidth onClick={handleOpenAddressModel}> Add </Button>
                 </div>
@@ -204,10 +220,22 @@ export const Cart = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <Button fullWidth variant='contained' type='submit' color='primary'>
+              <Button  fullWidth variant='contained' type='submit' color='primary'>
                 Deliver here
               </Button>
             </Grid>
+            <Grid item xs={12}>
+            {showAlert && (
+        <Alert  icon={<CheckIcon fontSize="inherit" />} severity="success">
+          <div className='flex justify-between'>
+            <p>
+              Order is successfully created
+            </p>
+          </div>
+        </Alert>
+      )}
+            </Grid>
+            
           </Grid>
           
           </Form>
