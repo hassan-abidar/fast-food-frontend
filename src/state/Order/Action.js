@@ -13,7 +13,7 @@ import {
       dispatch({ type: CREATE_ORDER_REQUEST });
   
       try {
-        const {data} = await api.post('/api/order', reqData.order,
+        const {data} = await api.post('/api/order/create', reqData.order,
     {
         headers:{
             Authorization:`Bearer ${reqData.jwt}`

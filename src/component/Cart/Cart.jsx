@@ -5,6 +5,8 @@ import { AddressCart } from './AddressCart'
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { createOrder } from '../../state/Order/Action';
 
  export const style = {
   position: 'absolute',
@@ -18,7 +20,7 @@ import * as Yup from 'yup';
   p: 4,
 };
 
-const items = [1, 1, 1]
+
 const initialValues = {
   streetAddress : "",
   state:"",
@@ -36,16 +38,35 @@ export const Cart = () => {
   const createOrderUsingSelectedAddress = () => {};
   const handleOpenAddressModel = () => setOpen(true);
   const [open, setOpen] = React.useState(false);
+  const {cart,auth}=useSelector(store=>store)
   const handleClose = () => setOpen(false);
-  const handleSubmit=(value)=>{
-      console.log("form value : ",value);
+  const dispatch=useDispatch();
+  const handleSubmit=(values)=>{
+    console.log("RestauId : ",cart.cartItems[0].food?.restaurant.id)
+      const data = {
+        jwt:localStorage.getItem("jwt"),
+        order:{
+          restaurantId:cart.cartItems[0].food?.restaurant.id,
+          deliveryAddress:{
+            fullName:auth.user.fullName,
+            streetAddress:values.streetAddress,
+            city:values.city,
+            state:values.state,
+            postalCode:values.postalCode,
+            country:"Morocco"
+          }
+        }
+      }
+      dispatch(createOrder(data))
+      console.log("form values : ",values);
   }
 
   return (
     <>
       <main className='lg:flex justify-between'>
         <section className='lg:w-[30%] space-y-6 lg:min-h-screen pt-10'>
-          {items.map((item) => (<CartItem />))}
+          {cart.cartItems.map((item) => 
+          (<CartItem item={item} />))}
           <Divider />
           <div className='billlDetails px-5 text-sm '>
             <p className='font-extralight py-5'>
@@ -57,12 +78,12 @@ export const Cart = () => {
                   Item Total
                 </p>
                 <p>
-                  114 MAD
+                  {cart.cart?.total} MAD
                 </p>
               </div>
               <div className='flex justify-between text-gray-400'>
                 <p>
-                  Deliver Free
+                  Delivery Charges
                 </p>
                 <p>
                   14 MAD
@@ -83,7 +104,7 @@ export const Cart = () => {
                 Total to pay
               </p>
               <p>
-                148 MAD
+                {cart.cart?.total+14+20} MAD
               </p>
 
             </div>

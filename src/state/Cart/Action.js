@@ -90,20 +90,23 @@ export const addItemToCart = (reqData) => {
   };
   
   
-  export const updateCartItem = (reqData) => {
+  export const updateCartItem = (reqData,jwt) => {
     return async (dispatch) => {
       dispatch({ type: UPDATE_CARTITEM_REQUEST });
+      console.log("jwt : ",jwt)
+      console.log("reqData : " , reqData)
   
       try {
-        const response= await api.put(`/api/cart-item/update`,reqData.data,
+        const response= await api.put(`/api/cart-item/update`,reqData,
         {
             headers:{
-                Authorization:`Bearer ${reqData.jwt}`,
+                Authorization:`Bearer ${jwt}`,
             }
         });
   
         dispatch({ type: UPDATE_CARTITEM_SUCCESS, payload: response.data });
       } catch (error) {
+        console.log("caught error : ", error)
         dispatch({ type: UPDATE_CARTITEM_FAILURE, payload: error });
       }
     };
