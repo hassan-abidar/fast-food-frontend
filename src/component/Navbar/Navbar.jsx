@@ -15,11 +15,11 @@ export const Navbar = () => {
     const {auth,cart} = useSelector(store=>store)
     const navigate = useNavigate();
     const handleAvatarClick =()=>{
-        // if(auth.user?.role==="CUSTOMER"){
+         if(auth.user?.role==="CUSTOMER"){
             navigate("/my-profile")
-        // }else{
-        //     navigate("/admin/restaurant")
-        // }
+         }else{
+             navigate("/admin/restaurants")
+         }
     }
   return (
     <div className='px-5 z-50 py-[.8rem] bg-[#e91e63] lg:px-20 flex justify-between'>
