@@ -22,7 +22,7 @@ export const Navbar = () => {
          }
     }
   return (
-    <div className='px-5 z-50 py-[.8rem] bg-[#e91e63] lg:px-20 flex justify-between'>
+    <div className='px-5 z-50 py-[.8rem] bg-[#1D5926] lg:px-20 flex justify-between'>
         <div className='flex items-center space-x-4'>
                 <li  className='logo font-semibold text-gray-300 text2p'>
                 Good food is the foundation of genuine happiness
@@ -40,7 +40,7 @@ export const Navbar = () => {
                 </IconButton>
             </div>
             <div className=''>
-                { auth.user ? (<Avatar onClick={handleAvatarClick} sx={{bgcolor:"white",color:pink.A400}}>
+                { auth.user ? (<Avatar onClick={handleAvatarClick} sx={{bgcolor:"white",color:"#1D5926"}}>
                     {auth.user.fullName[0].toUpperCase()}
                 </Avatar>):
             (<IconButton onClick={()=>navigate("/account/login")}>
