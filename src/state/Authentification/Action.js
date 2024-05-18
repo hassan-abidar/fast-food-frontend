@@ -73,6 +73,7 @@ export const addToFavroites = ({jwt,restaurantId})=>async(dispatch)=>{
         })
         
         dispatch({type:ADD_TO_FAVORITES_SUCCESS,payload:data})
+        window.location.reload();
         console.log("added to favorites",data)
     }catch(error){
         dispatch({type:ADD_TO_FAVORITES_FAILURE,payload:error})

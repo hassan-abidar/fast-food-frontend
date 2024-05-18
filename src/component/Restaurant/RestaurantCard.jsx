@@ -16,6 +16,7 @@ export const RestaurantCard = ({ item }) => {
 
         dispatch(addToFavroites({restaurantId:item?.id,jwt}))
         
+        
     }
     const handleNavigateToRestaurant = () => {
         if (item.open && item.address && item.address.city) {

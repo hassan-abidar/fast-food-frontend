@@ -12,7 +12,7 @@ export const Favorites = () => {
         My Favorites
       </h1>
       <div className='flex flex-wrap gap-5 justify-center'>
-        {auth.favorites.map((item)=><RestaurantCard item={item}/>)}
+        {auth?.favorites.map((item)=><RestaurantCard item={item}/>)}
 
       </div>
     </div>

@@ -40,12 +40,10 @@ const validationSchema = Yup.object().shape({
 });
 
 export const Cart = () => {
-  const createOrderUsingSelectedAddress = () => {};
   const handleOpenAddressModel = () => setOpen(true);
   const [open, setOpen] = React.useState(false);
   const {cart,auth}=useSelector(store=>store)
   const handleClose = () => setOpen(false);
-  const navigate=useNavigate()
   const dispatch=useDispatch();
   const handleClearCart =()=>{
     dispatch(clearCart(localStorage.getItem("jwt")));      
@@ -55,8 +53,8 @@ export const Cart = () => {
       const data = {
         jwt:localStorage.getItem("jwt"),
         order:{
-          restaurantId:cart.cartItems[0].food?.restaurant.id,
-          deliveryAddress:{
+            restaurantId:cart.cartItems[0].food?.restaurant.id,
+            deliveryAddress:{
             fullName:auth.user.fullName,
             streetAddress:values.streetAddress,
             city:values.city,
@@ -66,12 +64,10 @@ export const Cart = () => {
           }
         }
       }
+      console.log("data : ",data)
       dispatch(createOrder(data))
-      dispatch(clearCart(localStorage.getItem("jwt")));
       setShowAlert(true);   
-      handleClose()
-      
-      
+      handleClose();   
   }
 
   return (
@@ -223,19 +219,7 @@ export const Cart = () => {
               <Button  fullWidth variant='contained' type='submit' color='primary'>
                 Deliver here
               </Button>
-            </Grid>
-            <Grid item xs={12}>
-            {showAlert && (
-        <Alert  icon={<CheckIcon fontSize="inherit" />} severity="success">
-          <div className='flex justify-between'>
-            <p>
-              Order is successfully created
-            </p>
-          </div>
-        </Alert>
-      )}
-            </Grid>
-            
+            </Grid>           
           </Grid>
           
           </Form>
