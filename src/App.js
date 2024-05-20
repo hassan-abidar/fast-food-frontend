@@ -14,6 +14,7 @@ import { getUser } from './state/Authentification/Action.js';
 
 import { findCart } from './state/Cart/Action.js';
 import { Routers } from './Routers/Routers.jsx';
+import { getRestaurantByUserId } from './state/Restaurant/Actions.js';
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +25,12 @@ function App() {
     dispatch(getUser( auth.jwt ||jwt ));
     dispatch(findCart(jwt))
   },[auth.jwt]);
+
+  useEffect(()=>{
+    dispatch(getRestaurantByUserId(auth.jwt || jwt))
+    
+  },[auth.user]);
+
  
 
   return (

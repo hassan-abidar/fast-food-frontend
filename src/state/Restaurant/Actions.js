@@ -153,7 +153,7 @@ import {
       dispatch({ type: UPDATE_RESTAURANT_STATUS_REQUEST });
   
       try {
-        const response = await api.put(`/api/restaurant/${restaurantId}/status`,{}, {
+        const response = await api.put(`/api/admin/restaurant/${restaurantId}/status`,{}, {
           headers: {
             Authorization: `Bearer ${jwt}`,
           },
@@ -256,21 +256,23 @@ import {
       }
     };
   };
-  export const getRestaurantsCategory = (restaurantId, token) => {
+  export const getRestaurantsCategory = (jwt, restaurantId) => {
     return async (dispatch) => {
+      console.log("token : ", jwt)
+      
       dispatch({ type: GET_RESTAURANTS_CATEGORY_REQUEST });
   
       try {
         const { data } = await api.get(`/api/category/restaurant/${restaurantId}`, {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${jwt}`,
           },
         });
         dispatch({ type: GET_RESTAURANTS_CATEGORY_SUCCESS, payload: data });
         console.log("categories for restaurant with id ", restaurantId, ": ", data);
       } catch (error) {
         console.log("caught error: ", error);
-        dispatch({ type: GET_RESTAURANTS_CATEGORY_FAILURE, payload: error });
+        dispatch({ type: GET_RESTAURANTS_CATEGORY_FAILURE, payload: error.message });
       }
     };
   };

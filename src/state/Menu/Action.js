@@ -17,14 +17,14 @@ import {
   UPDATE_MENU_ITEMS_AVAILABILITY_FAILURE
 } from "./ActionType";
 
-export const createMenuItem = (menuItemData, token) => {
+export const createMenuItem = ({menu, jwt}) => {
   return async (dispatch) => {
     dispatch({ type: CREATE_MENU_ITEM_REQUEST });
 
     try {
-      const response = await api.post("/api/admin/food", menuItemData, {
+      const response = await api.post("/api/admin/food", menu, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${jwt}`,
         },
       });
       dispatch({ type: CREATE_MENU_ITEM_SUCCESS, payload: response.data });
@@ -55,18 +55,18 @@ export const getMenuItemsByRestaurantId = (reqData) => {
   };
 };
 
-export const deleteMenuItem = (menuItemId, token) => {
+export const deleteMenuItem = ({foodId, jwt}) => {
   return async (dispatch) => {
     dispatch({ type: DELETE_MENU_ITEM_REQUEST });
 
     try {
-      await api.delete(`/api/admin/food/${menuItemId}`, {
+      await api.delete(`/api/admin/food/${foodId}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${jwt}`,
         },
       });
-      dispatch({ type: DELETE_MENU_ITEM_SUCCESS, payload: menuItemId });
-      console.log("deleted menu item with id: ", menuItemId);
+      dispatch({ type: DELETE_MENU_ITEM_SUCCESS, payload: foodId });
+      console.log("deleted menu item with id: ", foodId);
     } catch (error) {
       console.log("caught error: ", error);
       dispatch({ type: DELETE_MENU_ITEM_FAILURE, payload: error });
@@ -93,14 +93,14 @@ export const searchMenuItem = (keyword, token) => {
   };
 };
 
-export const updateMenuItemsAvailability = (menuItemId, token) => {
+export const updateMenuItemsAvailability = ({foodId, jwt}) => {
   return async (dispatch) => {
     dispatch({ type: UPDATE_MENU_ITEMS_AVAILABILITY_REQUEST });
 
     try {
-      const response = await api.put(`/api/admin/food/${menuItemId}`, {}, {
+      const response = await api.put(`/api/admin/food/${foodId}`, {}, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${jwt}`,
         },
       });
       dispatch({ type: UPDATE_MENU_ITEMS_AVAILABILITY_SUCCESS, payload: response.data });

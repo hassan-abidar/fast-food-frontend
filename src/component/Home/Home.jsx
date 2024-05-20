@@ -27,7 +27,7 @@ export const Home = () => {
         <section className='banner -z-50 relative flex flex-col justify-center items-center'>
             <div className='w-[50vw] z-10 text-center'>
                     <p className='text-2xl lg:text6x font-bold z-10 py-5'>
-                        AjiCool
+                        KRISP
                     </p>
                     <p className='z-10 text-gray-300 text-xl lg:text-4xl'>
                     Where every bite brings you closer to Morocco's flavorful delights

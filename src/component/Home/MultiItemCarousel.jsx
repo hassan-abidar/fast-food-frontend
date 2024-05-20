@@ -5,6 +5,8 @@ import "slick-carousel/slick/slick-theme.css";
 import {topMeel} from "./topMeel";
 import { CarouselItem } from "./CarouselItem";
 
+
+
 export const MultiItemCarousel = () => {
     const settings = {
         dots: true,
