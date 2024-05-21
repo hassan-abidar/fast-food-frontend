@@ -6,7 +6,7 @@ import {
   } from './ActionTypes';
   import { api } from "../../component/Config/api";
   
-  export const fetchRestaurantOrder = (restaurantId,orderStatus,jwt) => {
+  export const fetchRestaurantOrder = ({restaurantId,orderStatus,jwt}) => {
     return async (dispatch) => {
       dispatch({ type: GET_RESTAURANTS_ORDER_REQUEST });
       console.log("Fetching restaurant orders...");
@@ -28,13 +28,12 @@ import {
     };
   };
   
-  export const updateOrderStatus = (orderId, newStatus,jwt) => {
+  export const updateOrderStatus = ({orderId, newStatus,jwt}) => {
     return async (dispatch) => {
       dispatch({ type: UPDATE_ORDER_STATUS_REQUEST });
-      console.log("Updating order status...");
-  
+      console.log("values : ", orderId, newStatus,jwt)
       try {
-        const response = await api.put(`/api/admin/orders/${orderId}/${newStatus}`,
+        const response = await api.put(`/api/admin/order/${orderId}/${newStatus}`,
          {},{
             headers:{
                 Authorization: `Bearer ${jwt}`

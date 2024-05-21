@@ -166,7 +166,7 @@ export const RestaurantDetails = (url) => {
                   </p>
                   <p className='text-gray-400 text-left'>
                     <span className='pr-5'></span>
-                    {restaurant.usersRestaurant?.contactInformation.email}
+                    {restaurant.usersRestaurant?.contactInformation?.email}
                   </p>
                 </div>
                 <div className='flex'>
@@ -175,7 +175,7 @@ export const RestaurantDetails = (url) => {
                   </p>
                   <p className='text-gray-400 text-left'>
                     <span className='pr-5'></span>
-                    {restaurant.usersRestaurant?.contactInformation.mobile}
+                    {restaurant.usersRestaurant?.contactInformation?.mobile}
                   </p>
                 </div>
                 <div className='flex'>
@@ -184,7 +184,7 @@ export const RestaurantDetails = (url) => {
                   </p>
                   <p className='text-gray-400 text-left'>
                     <span className='pr-5'></span>
-                    {restaurant.usersRestaurant?.contactInformation.facebook}
+                    {restaurant.usersRestaurant?.contactInformation?.facebook}
                   </p>
                 </div>
                 <div className='flex'>
@@ -193,7 +193,7 @@ export const RestaurantDetails = (url) => {
                   </p>
                   <p className='text-gray-400 text-left'>
                     <span className='pr-5'></span>
-                    {restaurant.usersRestaurant?.contactInformation.instagram}
+                    {restaurant.usersRestaurant?.contactInformation?.instagram}
                   </p>
                 </div>
                 

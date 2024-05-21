@@ -256,22 +256,23 @@ import {
       }
     };
   };
-  export const getRestaurantsCategory = (jwt, restaurantId) => {
+  export const getRestaurantsCategory = ({jwt, id}) => {
     return async (dispatch) => {
       console.log("token : ", jwt)
+      console.log("restaurantId",id)
       
       dispatch({ type: GET_RESTAURANTS_CATEGORY_REQUEST });
   
       try {
-        const { data } = await api.get(`/api/category/restaurant/${restaurantId}`, {
+        const { data } = await api.get(`/api/category/restaurant/${id}`, {
           headers: {
             Authorization: `Bearer ${jwt}`,
           },
         });
         dispatch({ type: GET_RESTAURANTS_CATEGORY_SUCCESS, payload: data });
-        console.log("categories for restaurant with id ", restaurantId, ": ", data);
+        console.log("categories for restaurant with id ", id, ": ", data);
       } catch (error) {
-        console.log("caught error: ", error);
+        console.log("caught error in categories: ", error);
         dispatch({ type: GET_RESTAURANTS_CATEGORY_FAILURE, payload: error.message });
       }
     };

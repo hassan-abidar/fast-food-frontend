@@ -8,6 +8,7 @@ import { uploadImageToCloudinary } from '../Admin/util/UploadToCloudinary';
 import { useDispatch, useSelector } from 'react-redux';
 import { createMenuItem } from '../../state/Menu/Action';
 import { getIngredientsOfRestaurant } from '../../state/Ingredients/Action';
+import { getRestaurantsCategory } from '../../state/Restaurant/Actions';
 
 
 const initialValues = {
@@ -52,6 +53,7 @@ export const CreateMenuForm = () => {
     }
     useEffect(() => {
         dispatch(getIngredientsOfRestaurant({ jwt, id: restaurant.usersRestaurant.id }))
+        dispatch(getRestaurantsCategory({ jwt, id: restaurant.usersRestaurant.id }))
     }, [])
     return (
         <div className='py-10 px-5 lg:flex items-center justify-center min-h-screen'>
