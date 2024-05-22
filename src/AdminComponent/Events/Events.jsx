@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Button, Grid, Modal, TextField, Typography } from '@mui/material';
 import { LocalizationProvider, DateTimePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
+import { EventCard } from '../../component/Profile/EventCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { createEvent, deleteEventAction, getRestaurantsEvents } from '../../state/Restaurant/Actions';
 
 const style = {
   position: 'absolute',
@@ -17,27 +20,31 @@ const style = {
 };
 
 export const Events = () => {
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("jwt"); 
+  const { restaurant } = useSelector(store => store);
+
+  useEffect(() => {
+    dispatch(getRestaurantsEvents({ restaurantId: restaurant.usersRestaurant.id, token }));
+  }, []);
+
   const initialFormValues = {
     image: "",
     location: "",
     name: "",
     startedAt: "",
-    endsAt: ""
+    endsAt: "",
+    description:""
   };
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [formValues, setFormValues] = React.useState({
-    image: "",
-    location: "",
-    name: "",
-    startedAt: "",
-    endsAt: ""
-  });
+  const [formValues, setFormValues] = React.useState(initialFormValues);
 
   const handleSubmit = () => {
-    console.log("formValues" , formValues);
-    setFormValues(initialFormValues)
+    dispatch(createEvent({ eventData: formValues, token }));
+    setFormValues(initialFormValues);
     handleClose();
   };
 
@@ -49,10 +56,9 @@ export const Events = () => {
   };
 
   const handleDateChange = (date, dateType) => {
-    const formattedDate = dayjs(date).format("MMMM DD, YYYY hh:mm A");
     setFormValues({
       ...formValues,
-      [dateType]: formattedDate
+      [dateType]: dayjs(date).toISOString() // Store the date in ISO format
     });
   };
 
@@ -72,6 +78,26 @@ export const Events = () => {
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Create New Event
             </Typography>
+            <Grid item xs={12}>
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  label="Event Name"
+                  name="name"
+                  value={formValues.name}
+                  onChange={handleFormChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  label="Event Description"
+                  name="description"
+                  value={formValues.description}
+                  onChange={handleFormChange}
+                />
+              </Grid>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -90,16 +116,6 @@ export const Events = () => {
                   label="Location"
                   name="location"
                   value={formValues.location}
-                  onChange={handleFormChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  margin="normal"
-                  fullWidth
-                  label="Event Name"
-                  name="name"
-                  value={formValues.name}
                   onChange={handleFormChange}
                 />
               </Grid>
@@ -141,6 +157,13 @@ export const Events = () => {
             </Grid>
           </Box>
         </Modal>
+        <div>
+          <div className='mt-5 px-5 flex flex-wrap gap-5'>
+          {restaurant.restaurantsEvents.map((item, index) => (
+                <EventCard item={item} role={"owner"}/>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

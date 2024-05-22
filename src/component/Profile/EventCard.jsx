@@ -2,38 +2,45 @@ import { CardActions, IconButton } from '@mui/material'
 import { Card, CardContent, CardMedia, Typography } from '@mui/material'
 import React from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useDispatch } from 'react-redux';
+import { deleteEventAction } from '../../state/Restaurant/Actions';
 
-export const EventCard = () => {
+export const EventCard = ({item,role}) => {
+  const token = localStorage.getItem("jwt")
+  const dispatch = useDispatch();
+  const handleDeleteEvent=(id)=>{
+    dispatch(deleteEventAction({eventId:id,token}))
+  }
   return (
     <div style={{ textAlign: 'left' }}>
       <Card sx={{ width: 345 }}>
         <CardMedia
-        image='https://images.pexels.com/photos/2067432/pexels-photo-2067432.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+        image={item.image}
           sx={{ height: 345 }}
         />
 
         <CardContent>
           <Typography variant='h5'>
-            Coffee Tasting Event
+            {item.name}
           </Typography>
           <Typography variant='body2'>
-            Discover the finest coffees from around the world.
+            {item.description}
           </Typography>
           <div className='py-2 space-y-2'>
             <p>
-              {"Coffee Barista, Downtown"}
+              {item.location}
             </p>
             <p className='text-sm text-blue-500'>
-              Saturday, May 10, 2024, 10:00 AM
+              {item.startedAt}
             </p>
             <p className='text-sm text-red-500'>
-              Sunday, May 11, 2024, 2:00 PM
+              {item.endsAt}
             </p>
           </div>
         </CardContent>
-        {true && <CardActions>
-          <IconButton>
-            <DeleteIcon />
+        {role==="owner" && <CardActions>
+          <IconButton onClick={()=>handleDeleteEvent(item.id)}>
+            <DeleteIcon  />
           </IconButton>
         </CardActions>}
       </Card>

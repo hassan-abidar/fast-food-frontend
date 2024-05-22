@@ -8,7 +8,6 @@ import { getAllRestaurantsAction } from '../../state/Restaurant/Actions'
 import { useNavigate } from 'react-router-dom'
 import { findCart } from '../../state/Cart/Action'
 
-const restaurants = [1,1,1,1,1,1,1,1]
 
 export const Home = () => {
   const navigate = useNavigate()

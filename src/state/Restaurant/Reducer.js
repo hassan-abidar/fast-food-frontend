@@ -64,6 +64,7 @@ export const restaurantReducer =(state=initialState,action)=>{
                 ),
             };
         case actionTypes.CREATE_EVENTS_SUCCESS:
+        case actionTypes.EDIT_EVENTS_SUCCESS:
             return{
                 ...state,
                 loading:false,

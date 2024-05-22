@@ -36,6 +36,7 @@ export const RestaurantDetails = () => {
     console.log("menu : ", menu)
 
     useEffect(() => {
+        dispatch(getRestaurantsCategory({ jwt, restaurantId: id }))
         dispatch(getRestaurantById({ jwt, restaurantId: id }))
         dispatch(getRestaurantsCategory({ id, jwt }))
         dispatch(getMenuItemsByRestaurantId({

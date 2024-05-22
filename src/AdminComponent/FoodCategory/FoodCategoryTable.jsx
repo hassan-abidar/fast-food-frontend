@@ -44,7 +44,7 @@ export const FoodCategoryTable = () => {
         console.log("restaurant id :" ,restaurant.usersRestaurant?.id)
         const restaurantId = restaurant.usersRestaurant?.id;
         console.log("jwt : ", jwt)
-        dispatch(getRestaurantsCategory(jwt,restaurantId))
+        dispatch(getRestaurantsCategory({jwt,restaurantId}))
         dispatch(fetchRestaurantOrder({
           jwt,
           restaurantId:restaurant.usersRestaurant?.id

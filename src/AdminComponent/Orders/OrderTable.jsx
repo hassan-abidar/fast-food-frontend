@@ -17,7 +17,7 @@ const orderStatus = [
   { label: "Delivered", value: "DELIVERED" },
 ];
 
-export const OrderTable = () => {
+export const OrderTable = ({ filterValue }) => {
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
   const { restaurant, restaurantOrder, ingredients, menu } = useSelector(store => store);
@@ -48,6 +48,13 @@ export const OrderTable = () => {
     dispatch(updateOrderStatus({ orderId, newStatus, jwt }));
     handleClose();
   };
+  const filteredOrders = restaurantOrder.orders.filter(order => {
+    if (filterValue === "all") {
+      return true; // Show all orders
+    } else {
+      return order.orderStatus === filterValue; // Show orders with matching status
+    }
+  });
 
   return (
     <Box>
@@ -71,8 +78,9 @@ export const OrderTable = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {restaurantOrder.orders.map((row) => (
-                <TableRow
+              {
+filteredOrders.map((row) => (
+  <TableRow
                   key={row.id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
@@ -127,7 +135,7 @@ export const OrderTable = () => {
                     </Menu>
                   </TableCell>
                 </TableRow>
-              ))}
+))}
             </TableBody>
           </Table>
         </TableContainer>
