@@ -19,7 +19,7 @@ export const OrderCard = ({item,order}) => {
             </div>
         </div> 
         <div>
-            <Button disabled className='cursor-not-allowed'>  
+            <Button variant='contained' disabled className='cursor-not-allowed'>  
                 {order.orderStatus}
             </Button>
          </div>    

@@ -3,6 +3,8 @@ import { OrderCard } from './OrderCard';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsersOrders } from '../../state/Order/Action';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 export const Orders = () => {
   const navigate = useNavigate();
@@ -34,7 +36,7 @@ export const Orders = () => {
             <div key={order.id} className='order-container p-5 border border-gray-300 rounded-md'>
               <div className='flex justify-between items-center cursor-pointer' onClick={() => toggleOrder(order.id)}>
                 <h2 className='text-lg font-medium'>Order ID: {order.id}</h2>
-                <p className='text-sm text-gray-500'>{expandedOrderId === order.id ? '-' : '+'}</p>
+                <p className='text-sm text-gray-500'>{expandedOrderId === order.id ? <RemoveIcon/> : <AddIcon/>}</p>
               </div>
               {expandedOrderId === order.id && (
                 <div className='items mt-4 space-y-3'>

@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createMenuItem } from '../../state/Menu/Action';
 import { getIngredientsOfRestaurant } from '../../state/Ingredients/Action';
 import { getRestaurantsCategory } from '../../state/Restaurant/Actions';
+import { useNavigate } from 'react-router-dom';
 
 
 const initialValues = {
@@ -29,6 +30,7 @@ export const CreateMenuForm = () => {
     const dispatch = useDispatch();
     const jwt = localStorage.getItem("jwt");
     const { restaurant, ingredients } = useSelector(store => store);
+    const navigate = useNavigate()
     const formik = useFormik(
         {
             initialValues,
@@ -36,6 +38,7 @@ export const CreateMenuForm = () => {
                 values.restaurantId = 1
                 console.log("values provided : ", values)
                 dispatch(createMenuItem({menu:values,jwt}))
+                navigate("/admin/restaurants/menu")
             }
         }
     )
@@ -53,7 +56,7 @@ export const CreateMenuForm = () => {
     }
     useEffect(() => {
         dispatch(getIngredientsOfRestaurant({ jwt, id: restaurant.usersRestaurant.id }))
-        dispatch(getRestaurantsCategory({ jwt, id: restaurant.usersRestaurant.id }))
+        dispatch(getRestaurantsCategory({ jwt, restaurantId: restaurant.usersRestaurant.id }))
     }, [])
     return (
         <div className='py-10 px-5 lg:flex items-center justify-center min-h-screen'>

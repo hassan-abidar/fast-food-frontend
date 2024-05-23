@@ -281,7 +281,7 @@ import {
   };
   export const getRestaurantsCategory = ({jwt, restaurantId}) => {
     return async (dispatch) => {
-      console.log("token : ", jwt)
+      console.log("token cat: ", jwt)
       console.log("restaurantId",restaurantId)
       
       dispatch({ type: GET_RESTAURANTS_CATEGORY_REQUEST });

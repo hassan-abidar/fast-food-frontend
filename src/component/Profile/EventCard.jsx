@@ -9,6 +9,8 @@ export const EventCard = ({item,role}) => {
   const token = localStorage.getItem("jwt")
   const dispatch = useDispatch();
   const handleDeleteEvent=(id)=>{
+    const confirmed = window.confirm("Do you want to delete this event ?")
+    if(confirmed)
     dispatch(deleteEventAction({eventId:id,token}))
   }
   return (

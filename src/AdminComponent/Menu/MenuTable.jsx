@@ -30,10 +30,13 @@ export const MenuTable = () => {
         }));
     }, [])
     const handleDelete=(foodId)=>{
-        dispatch(deleteMenuItem({
-            foodId:foodId,
-            jwt
-        }))
+        const userConfirmed = window.confirm("Do you want to delete this item ?");
+        if(userConfirmed){
+            dispatch(deleteMenuItem({
+                foodId:foodId,
+                jwt
+            }))
+        }
     }
     const updateAvailability =(foodId)=>{
         dispatch(updateMenuItemsAvailability(

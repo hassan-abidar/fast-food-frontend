@@ -74,7 +74,7 @@ export const deleteMenuItem = ({foodId, jwt}) => {
   };
 };
 
-export const searchMenuItem = (keyword, token) => {
+export const searchMenuItem = ({keyword, token}) => {
   return async (dispatch) => {
     dispatch({ type: SEARCH_MENU_ITEM_REQUEST });
 
