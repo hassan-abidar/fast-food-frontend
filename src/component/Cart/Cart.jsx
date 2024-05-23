@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createOrder } from '../../state/Order/Action';
 import { clearCart } from '../../state/Cart/Action';
 import jsPDF from 'jspdf';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 export const style = {
   position: 'absolute',
@@ -159,8 +160,9 @@ export const Cart = () => {
                 {cart.cart?.total + 14 + 20} MAD
               </p>
             </div>
-            <Button color='primary' variant='contained' fullWidth onClick={handleClearCart}> Clear Cart </Button>
           </div>
+          <Button color='primary' variant='contained' onClick={handleClearCart}>{<DeleteForeverIcon/>} </Button>
+
         </section>
         <Divider orientation='vertical' flexItem />
         <section className='lg:w-[70%] flex justify-center px-5 pb-10 lg:pb-0 '>

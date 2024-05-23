@@ -2,7 +2,15 @@ import React from 'react';
 import HomeIcon from '@mui/icons-material/Home';
 import { Button, Card } from '@mui/material';
 
-export const AddressCart = ({ item, showButton, handleSelectAddress }) => {
+export const AddressCart = ({item, showButton, handleSelectAddress }) => {
+  
+ const handleClick=()=>{
+  const confirm = window.confirm("Do you want to deliver to this address ? ")
+  if(confirm){
+    handleSelectAddress(item)
+  }
+ }
+
   return (
     <Card className='flex gap-5 w-64 p-5'>
       <HomeIcon />
@@ -27,9 +35,9 @@ export const AddressCart = ({ item, showButton, handleSelectAddress }) => {
             color='primary'
             variant='contained'
             fullWidth
-            onClick={() => handleSelectAddress(item)}
+            onClick={() => handleClick()}
           >
-            Deliver here
+            Deliver Here
           </Button>
         )}
       </div>

@@ -8,6 +8,7 @@ import { CarouselItem } from "./CarouselItem";
 
 
 export const MultiItemCarousel = () => {
+  
     const settings = {
         dots: true,
         infinite: true,

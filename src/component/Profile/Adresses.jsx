@@ -86,7 +86,7 @@ export const Adresses = () => {
                 <AddressCart
                   key={address.id}
                   item={address}
-                  showButton={true}
+                  showButton={false}
                 />
               ))}
               
