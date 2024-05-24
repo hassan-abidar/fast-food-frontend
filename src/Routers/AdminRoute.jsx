@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux'
 
 export const AdminRoute = () => {
   const {restaurant}=useSelector(store=>store)
-  console.log("restaurant",restaurant)
   return (
     <div>
          <Routes>

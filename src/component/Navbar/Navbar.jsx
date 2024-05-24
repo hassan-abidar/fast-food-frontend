@@ -34,11 +34,6 @@ export const Navbar = () => {
                     </IconButton>
                 </div>
                 <div>
-                    <IconButton>
-                        <SearchIcon sx={{ fontSize: "1.5rem" }} />
-                    </IconButton>
-                </div>
-                <div>
                     {auth.user ? (
                         <Avatar onClick={handleAvatarClick} sx={{ bgcolor: "white", color: "#1D5926" }}>
                             {auth.user.fullName[0].toUpperCase()}
